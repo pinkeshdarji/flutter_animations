@@ -10,10 +10,6 @@ class RiveDemo extends StatefulWidget {
 }
 
 class _RiveDemoState extends State<RiveDemo> {
-  void _togglePlay() {
-    setState(() => _controller.isActive = !_controller.isActive);
-  }
-
   bool get isPlaying => _controller?.isActive ?? false;
 
   Artboard _riveArtboard;
@@ -26,10 +22,13 @@ class _RiveDemoState extends State<RiveDemo> {
       (data) async {
         final file = RiveFile.import(data);
         final artboard = file.mainArtboard;
-        artboard.addController(_controller = SimpleAnimation('launch'));
         setState(() => _riveArtboard = artboard);
       },
     );
+  }
+
+  void _launchRocket() {
+    _riveArtboard.addController(_controller = SimpleAnimation('launch'));
   }
 
   @override
@@ -41,11 +40,8 @@ class _RiveDemoState extends State<RiveDemo> {
             : Rive(artboard: _riveArtboard),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _togglePlay,
-        tooltip: isPlaying ? 'Pause' : 'Play',
-        child: Icon(
-          isPlaying ? Icons.pause : Icons.play_arrow,
-        ),
+        onPressed: _launchRocket,
+        child: Icon(Icons.play_arrow),
       ),
     );
   }

@@ -23,6 +23,7 @@ class _ImplicitDemoState extends State<ImplicitDemo>
           ),
           AnimatedContainer(
             duration: Duration(milliseconds: 500),
+            curve: Curves.easeOut,
             height: 350,
             width: 250,
             margin: EdgeInsets.only(bottom: bottomMargin),
